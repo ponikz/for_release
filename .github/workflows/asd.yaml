@@ -2,7 +2,7 @@ on: push
 
 jobs:
   test_schedule:
-    runs-on: macos-13-large
+    runs-on: ubuntu-latest
     steps:
       - name: Not on Monday or Wednesday
         if: github.event.schedule != '30 5 * * 1,3'
