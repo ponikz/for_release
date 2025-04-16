@@ -3,7 +3,6 @@ on: push
 jobs:
   test_schedule:
     runs-on: ubuntu-latest
-    timeout-minutes: 1
     
     steps:
       - name: Whoami
