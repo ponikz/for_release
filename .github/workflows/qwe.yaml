@@ -16,3 +16,5 @@ jobs:
             population: large
           - city: yekaterinburg
             transport: train
+    steps:
+      - name: qqqq
