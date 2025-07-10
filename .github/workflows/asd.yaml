@@ -1,24 +1,27 @@
-on: push
+Перенос по строкам
+on:
+  push:
+
 jobs:
-  upload:
+  generate-matrix:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - name: Create a file
-        run: echo "hello world" > my-file.txt
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-artifact # NOTE: same artifact name
-          path: my-file.txt
-  upload-again:
-    needs: upload
-    runs-on: ubuntu-latest
+      - name: Generate matrix data
+        id: set-matrix
+        run: |
+          # Генерируем строго валидный JSON
+          MATRIX_JSON='{"version":[12,14,16]}'
+          echo "matrix=${MATRIX_JSON}" >> $GITHUB_OUTPUT
+          echo "DEBUG: Generated matrix - ${MATRIX_JSON}"
+
+  build:
+    needs: generate-matrix
+    runs-on: ubuntu-cloud-runner
+    strategy:
+      matrix:
+        version: ${{ fromJson(needs.generate-matrix.outputs.matrix).version }}
     steps:
-      - name: Create a different file
-        run: echo "goodbye world" > my-file.txt
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-artifact # NOTE: same artifact name
-          path: my-file.txt
-          overwrite: true
+      - name: Display version
+        run: echo "Processing Node.js ${{ matrix.version }}"
