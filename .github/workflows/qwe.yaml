@@ -18,3 +18,4 @@ jobs:
             transport: train
     steps:
       - name: qqqq
+        run: echo "asd"
