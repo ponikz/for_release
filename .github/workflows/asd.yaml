@@ -18,7 +18,7 @@ jobs:
 
   build:
     needs: generate-matrix
-    runs-on: ubuntu-cloud-runner
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         version: ${{ fromJson(needs.generate-matrix.outputs.matrix).version }}
