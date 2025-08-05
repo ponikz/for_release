@@ -5,23 +5,8 @@ on:
 jobs:
   generate-matrix:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Generate matrix data
         id: set-matrix
-        run: |
-          # Генерируем строго валидный JSON
-          MATRIX_JSON='{"version":[12,14,16]}'
-          echo "matrix=${MATRIX_JSON}" >> $GITHUB_OUTPUT
-          echo "DEBUG: Generated matrix - ${MATRIX_JSON}"
+        run: echo $GITHUB_PATH
 
-  build:
-    needs: generate-matrix
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: ${{ fromJson(needs.generate-matrix.outputs.matrix).version }}
-    steps:
-      - name: Display version
-        run: echo "Processing Node.js ${{ matrix.version }}"
