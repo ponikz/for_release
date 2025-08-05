@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Generate matrix data
         id: set-matrix
-        run: echo $GITHUB_PATH
+        run: echo "$GITHUB_PATH"
 
