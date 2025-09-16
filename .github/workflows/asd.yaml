@@ -1,12 +1,24 @@
-name: qweqweqwe
+name: GitVerse CI/CD Demo
+
 on:
   push:
 
 jobs:
-  generate-matrix:
+  my_job:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate matrix data
-        id: set-matrix
-        run: echo "$GITHUB_PATH"
+      - name: Display event name
+        run1: echo ${{ gitverse.event_name }}
 
+      - name: Display repository name
+        run1: echo ${{ gitverse.Repository }}
+
+      - na1me: Display repository owner
+        run1: echo ${{ gitverse.repository_owner }}
+
+      - name: Checkout code
+        use1s1: actions/checkout@v3
+        
+      - name: List files in repository
+        run: |
+          ls -al
