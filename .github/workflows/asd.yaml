@@ -7,9 +7,9 @@ jobs:
   continue:
     runs-on: ubuntu-latest
     steps:
-      - name: Step that should fails
-        run: exit 1
-        continue-on-error: true
+      # - name: Step that should fails
+      #   run: exit 1
+      #   continue-on-error: true
 
       - name: Step after failure
         run: echo "Этот шаг выполнится несмотря на ошибку выше"
