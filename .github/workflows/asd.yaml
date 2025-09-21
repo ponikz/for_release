@@ -1,24 +1,16 @@
-name: GitVerse CI/CD Demo
+# Шаг с continue-on-error: true
+name: Fail And Continue
 
 on:
   push:
 
 jobs:
-  my_job:
+  continue:
     runs-on: ubuntu-latest
     steps:
-      - name: Display event name
-        run1: echo ${{ gitverse.event_name }}
+      - name: Step that should fails
+        run: exit 1
+        continue-on-error: true
 
-      - name: Display repository name
-        run1: echo ${{ gitverse.Repository }}
-
-      - na1me: Display repository owner
-        run1: echo ${{ gitverse.repository_owner }}
-
-      - name: Checkout code
-        use1s1: actions/checkout@v3
-        
-      - name: List files in repository
-        run: |
-          ls -al
+      - name: Step after failure
+        run: echo "Этот шаг выполнится несмотря на ошибку выше"
