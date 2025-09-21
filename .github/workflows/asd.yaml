@@ -1,8 +1,7 @@
 # Шаг с continue-on-error: true
 name: Fail And Continue
 
-on:
-  push:
+on: push
 
 jobs:
   continue:
