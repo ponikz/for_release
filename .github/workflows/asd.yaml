@@ -1,10 +1,9 @@
-# Шаг с continue-on-error: true
-name: Fail And Continue
-
-on: push
+name: test_test
+on: 
+  push:
 
 jobs:
-  continue:
+  qwe:
     runs-on: ubuntu-latest
     steps:
       # - name: Step that should fails
