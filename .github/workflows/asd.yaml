@@ -3,7 +3,7 @@ on:
   push:
 
 jobs:
-  qwe:
+  qqqqqq:
     runs-on: ubuntu-latest
     steps:
       # - name: Step that should fails
