@@ -1,0 +1,11 @@
+name: qweqwe
+
+on:
+  workflow_dispatch
+jobs:
+  qwe:
+    runs-on: ubuntu-latest1
+    
+    steps:
+      - name: qwe
+        run: echo Run!
