@@ -1,0 +1,11 @@
+
+
+on:
+  push:
+jobs:
+  qwe:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: qwe
+        run: echo Run!
