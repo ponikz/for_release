@@ -1,0 +1,17 @@
+name: HOOPS main
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        required: true
+        type: string
+
+jobs:
+  hoops_frontend:
+    runs-on: runner_2  
+    env:
+      REGISTRY_IMAGE: ${{ github.repository }}/${{ github.ref_name }}
+    steps:
+      - name: Значение переменной runner
+        run: echo ${{ inputs.runner }}
