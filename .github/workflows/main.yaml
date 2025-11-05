@@ -9,7 +9,7 @@ on:
 
 jobs:
   hoops_frontend:
-    runs-on: runner_2  
+    runs-on: ${{ inputs.runner }}
     env:
       REGISTRY_IMAGE: ${{ github.repository }}/${{ github.ref_name }}
     steps:
