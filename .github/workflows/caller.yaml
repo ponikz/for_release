@@ -7,4 +7,4 @@ jobs:
   call-main:
     uses: ./.github/workflows/main_workflow.yaml
     with:
-      runner: runner_2
+      runner: runner_1
