@@ -1,0 +1,24 @@
+# Пример содержимого контекста GitVerse
+name: Print Context
+
+on:
+  pull_request:
+
+jobs:
+  context_usage:
+    runs-on: ubuntu-latest
+    steps:          
+        
+        # В GitVerse существует контекст выполнения задачи и его можно получить через переменную gitverse
+        # Выведем на экран контекст события/триггера
+      - name: Print GitVerse Context
+        run: echo '${{ toJson(github) }}'
+        
+        # Выведем на экран некоторые переменные контекста        
+      - name: Print Repo Variables
+        run: |          
+          echo "Repository = ${{ github.repository }}"
+          echo "Ref        = ${{ github.ref }}"
+          echo "SHA        = ${{ github.sha }}"
+          echo "Actor      = ${{ github.actor }}"
+          echo "Event name = ${{ github.event_name }}"
