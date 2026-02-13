@@ -2,7 +2,7 @@ name: HOOPS main
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Generate test artifact
         run: |
-          openssl rand -out artifact.txt 1073741824
+          openssl rand -out artifact.txt 1973741824
 
       - name: Create release
         uses: softprops/action-gh-release@v2
