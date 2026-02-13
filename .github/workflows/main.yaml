@@ -1,17 +1,22 @@
 name: HOOPS main
 
 on:
-  workflow_call:
-    inputs:
-      runner:
-        required: true
-        type: string
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
-  hoops_frontend:
-    runs-on: ${{ inputs.runner }}
-    env:
-      REGISTRY_IMAGE: ${{ github.repository }}/${{ github.ref_name }}
+  release:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Значение переменной runner
-        run: echo ${{ inputs.runner }}
+      - name: Generate test artifact
+        run: |
+          openssl rand -out artifact.txt 1G
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: test-${{ github.run_id }}
+          name: "Automated test release"
+          files: artifact.txt
