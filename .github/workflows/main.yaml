@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Generate test artifact
         run: |
-          openssl rand -out artifact.txt 1G
+          openssl rand -out artifact.txt 1073741824
 
       - name: Create release
         uses: softprops/action-gh-release@v2
