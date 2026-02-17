@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Auth with repo for push
-        run: git remote add -f dest https://${GITHUB_TOKEN}@github.com/ponikz/for_release.git
+        run: git remote add -f dest https://${MY_TOKEN}@github.com/ponikz/for_release.git
+        env:
+          MY_TOKEN: ${{ secrets.TOKEN_FOR_TEST }}
       - name: Set GIT credentials
         run: |
           git config user.email "ponikz@yandex.ru"
