@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.TOKEN_FOR_TEST }}
 
       - name: Auth with repo for push
         run: git remote add -f dest https://${MY_TOKEN}@github.com/ponikz/for_release.git
