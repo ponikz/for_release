@@ -15,20 +15,20 @@ jobs:
 
       # - name: Auth with repo for push
       #   run: git remote add -f dest https://${GITHUB_TOKEN}@github.com/ponikz/for_release.git
-      - name: Set GIT credentials
-        run: |
-          git config user.email "ponikz@yandex.ru"
-          git config user.name "ponikz"
+      # - name: Set GIT credentials
+      #   run: |
+      #     git config user.email "ponikz@yandex.ru"
+      #     git config user.name "ponikz"
 
-      - name: Write current time
-        run: |
-          date +"%Y-%m-%d %H:%M:%S" > README.txt
+      # - name: Write current time
+      #   run: |
+      #     date +"%Y-%m-%d %H:%M:%S" > README.txt
 
-      - name: Commit & push
-        run: |
-          git add README.txt
-          git commit -m "Update time $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
+      # - name: Commit & push
+      #   run: |
+      #     git add README.txt
+      #     git commit -m "Update time $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
 
-      - name: Push the version update
-        run: |
-          git push
+      # - name: Push the version update
+      #   run: |
+      #     git push
