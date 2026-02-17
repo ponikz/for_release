@@ -2,6 +2,8 @@ name: Update time in readme
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *" 
 
 jobs:
   update-time:
@@ -12,9 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Auth with repo for push
-        run: git remote add -f dest https://ponikz:${GITHUB_TOKEN}@github.com/ponikz/for_release.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_TEST }}
+        run: git remote add -f dest https://${GITHUB_TOKEN}@github.com/ponikz/for_release.git
       - name: Set GIT credentials
         run: |
           git config user.email "ponikz@yandex.ru"
