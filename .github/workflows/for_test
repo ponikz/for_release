@@ -1,0 +1,34 @@
+name: Update time in readme
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Auth with repo for push
+        run: git remote add -f dest https://ponikz:${GITHUB_TOKEN}@github.com/ponikz/for_release.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_FOR_TEST }}
+      - name: Set GIT credentials
+        run: |
+          git config user.email "ponikz@yandex.ru"
+          git config user.name "ponikz"
+
+      - name: Write current time
+        run: |
+          date +"%Y-%m-%d %H:%M:%S" > README.txt
+
+      - name: Commit & push
+        run: |
+          git add README.txt
+          git commit -m "Update time $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
+
+      - name: Push the version update
+        run: |
+          git push dest
