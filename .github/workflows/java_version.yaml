@@ -1,0 +1,12 @@
+name: Update time in readme
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print java version
+        run: java -version
