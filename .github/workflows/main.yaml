@@ -14,11 +14,14 @@ jobs:
     steps:
       - name: Generate test artifact
         run: |
-          openssl rand -out artifact.txt 2018741824
+          mkdir artifacts
+          for i in $(seq 1 99); do
+            openssl rand -out artifacts/artifact_$i.txt 2018741824
+          done
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: test-${{ github.run_id }}
           name: "Automated test release"
-          files: artifact.txt
+          files: artifacts/*
