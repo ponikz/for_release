@@ -1,0 +1,15 @@
+name: Clean Packages
+
+on:
+  workflow_dispatch:
+jobs:
+  clean_docker_packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clean Docker Packages
+        uses: actions/delete-package-versions@v5
+        with:           
+          package-type: 'container'
+          min-versions-to-keep: 1
+          delete-only-untagged-versions: 'false'
+  
