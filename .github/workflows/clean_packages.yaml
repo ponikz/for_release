@@ -2,13 +2,21 @@ name: Clean Packages
 
 on:
   workflow_dispatch:
+permissions:
+  contents: read
+  packages: write  
 jobs:
   clean_docker_packages:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug access
+        run: |
+          curl -I \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/user
       - name: Clean Docker Packages
         uses: actions/delete-package-versions@v5
         with:           
           package-name: 'my-app'
           package-type: 'container'
-          min-versions-to-keep: '2.0.0'      
+          min-versions-to-keep: 1      
