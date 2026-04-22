@@ -16,7 +16,7 @@ jobs:
       - name: Generate test artifact
         run: |
           mkdir artifacts
-          for i in $(seq 1 7); do
+          for i in $(seq 1 8); do
             openssl rand -out artifacts/artifact_$i.txt 2018741824
           done
 
