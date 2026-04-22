@@ -15,7 +15,7 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/user
       - name: Clean Docker Packages
-        uses: actions/delete-package-versions@v5
+        uses: actions/delete-package-versions@main
         with:           
           package-name: 'my-app'
           package-type: 'container'
