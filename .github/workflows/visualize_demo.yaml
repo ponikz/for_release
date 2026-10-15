@@ -1,0 +1,146 @@
+
+name: Workflow Visualizer Demo
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  initialize:
+    name: "01 - Initialize"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize pipeline
+        run: |
+          echo "Initializing CI/CD pipeline"
+          sleep 3
+
+  lint:
+    name: "02 - Code Lint"
+    needs: initialize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run linter
+        run: |
+          echo "Checking code style"
+          sleep 4
+
+  unit_tests:
+    name: "03 - Unit Tests (${{ matrix.suite }})"
+    needs: initialize
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [core, api, ui]
+    steps:
+      - name: Run unit tests
+        run: |
+          echo "Running ${{ matrix.suite }} tests"
+          sleep 5
+
+  security:
+    name: "04 - Security Scan"
+    needs: initialize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scan dependencies
+        run: |
+          echo "Scanning for vulnerabilities"
+          sleep 6
+
+  build_backend:
+    name: "05 - Build Backend"
+    needs: [lint, unit_tests, security]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build backend
+        run: |
+          echo "Building backend application"
+          sleep 4
+
+  build_frontend:
+    name: "06 - Build Frontend"
+    needs: [lint, unit_tests, security]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build frontend
+        run: |
+          echo "Building frontend application"
+          sleep 5
+
+  package:
+    name: "07 - Package Artifacts"
+    needs: [build_backend, build_frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Package application
+        run: |
+          echo "Packaging artifacts"
+          sleep 3
+
+  integration:
+    name: "08 - Integration Tests"
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run integration tests
+        run: |
+          echo "Testing integrated application"
+          sleep 5
+
+  deploy_staging:
+    name: "09 - Deploy Staging"
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to staging"
+          sleep 4
+
+  smoke:
+    name: "10 - Smoke Tests"
+    needs: deploy_staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run smoke tests
+        run: |
+          echo "Running smoke tests"
+          sleep 3
+
+  e2e:
+    name: "11 - E2E Tests"
+    needs: deploy_staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run E2E tests
+        run: |
+          echo "Running end-to-end tests"
+          sleep 5
+
+  deploy_prod:
+    name: "12 - Deploy Production"
+    needs: [smoke, e2e]
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production"
+          sleep 4
+
+  report:
+    name: "13 - Final Report"
+    needs: [smoke, e2e, deploy_prod]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate report
+        run: |
+          echo "Pipeline finished"
+          echo "Smoke: ${{ needs.smoke.result }}"
+          echo "E2E: ${{ needs.e2e.result }}"
+          echo "Production: ${{ needs.deploy_prod.result }}"
+          sleep 2
