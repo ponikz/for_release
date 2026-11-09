@@ -7,6 +7,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  init1:
+    name: "01 - Initialize"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize pipeline
+        run: |
+          echo "Initializing CI/CD pipeline"
+          sleep 3
+  init2:
+    name: "01 - Initialize"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initialize pipeline
+        run: |
+          echo "Initializing CI/CD pipeline"
+          sleep 3          
   initialize:
     name: "01 - Initialize"
     runs-on: ubuntu-latest
